@@ -15,60 +15,57 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+    static Scanner input;
+
+    static {
+        input = new Scanner(System.in);
+    }
 
     // Omar Work
     static ArrayList<User> users = new ArrayList<>();
 
     // Joudy Work
     public static String Username(){
-        Scanner input = new Scanner(System.in);
         System.out.println("Enter a valid username.");
         String user = input.nextLine();
 
-        if(user.trim().equals("")){
+        if(user.trim().isEmpty()){
             throw new IllegalArgumentException("Username cannot be empty.");
         }
-        else {
-            for(User u : users){
-                if(u.getName().equals(user)){
-                    throw new IllegalArgumentException("Username already exists.");
-                }
-            }
-        }
-        return user;
+        else
+            return user;
     }
 
     public static void Password(String name){
-
-        Scanner input = new Scanner(System.in);
-
         System.out.println("Enter a valid password.");
         String password = input.nextLine().trim();
-        if(password.trim().equals("") || password.length() < 8){
+        if(password.trim().isEmpty() || password.length() < 8){
             throw new IllegalArgumentException("Password cannot be empty and be more than 8 characters.");
         }
+        boolean accountExists = false;
         for(User u : users){
             if(u.getName().equals(name) && u.getPassword().equals(password)){
                 System.out.println("Successfully logged in with an existing account.");
-            } else {
-               users.add(new User(name, password));
-                System.out.println("Successfully logged in with a new account.");
+                accountExists = true;
+                break;
             }
+        }
+        if(!accountExists){
+            users.add(new User(name, password));
+            System.out.println("Successfully logged in with a new account.");
         }
 
     }
 
-    public static void main(String[] args) {
+     static void main() {
 
         users.add(new User("admin","12345678"));
 
-        Scanner input = new Scanner(System.in);
-        String currentName="";
-        String pass="";
+        String currentName;
 
-        System.out.println("");
+
         while(true){
-            System.out.println("Press enter to start:");
+            System.out.println("\n\nPress enter to start:\n");
             if(input.nextLine().equals("PRINTALLUSERS")){
                 for(User u : users){
                     System.out.println(u);
@@ -77,16 +74,16 @@ public class Main {
             try {
                  currentName = Username();
             }
-            catch (Exception e){
+            catch (IllegalArgumentException e){
                 System.out.println(e.getMessage() + " Try again.");
                 continue;
             }
             try{
                 Password(currentName);
             }
-            catch (Exception e){
+            catch (IllegalArgumentException e){
                 System.out.println(e.getMessage() + " \nTry again.");
-                continue;
+                //continue;
             }
         }
 
