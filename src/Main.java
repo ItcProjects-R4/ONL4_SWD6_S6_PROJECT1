@@ -1,5 +1,3 @@
-
-
 /*
 o username
 o password  :validation يعملوا .
@@ -13,15 +11,22 @@ o Methods                      Joudy
 o Exception Handling           Faris
 o ArrayList لتخزين users       Omar
 */
+import java.util.ArrayList;
+
 public class Main {
+
+    // Omar Work
+    static ArrayList<User> users = new ArrayList<>();
+
     public static void main(String[] args) {
-        /*
-        */
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
+        // Add Users
+        users.add(new User("admin","12345678"));
+        users.add(new User("faris","password123"));
+        users.add(new User("joudy","11111111"));
 
-            System.out.println("i = " + i);
-        }
+        System.out.println("Users Loaded Successfully");
+
     }
+
 }
