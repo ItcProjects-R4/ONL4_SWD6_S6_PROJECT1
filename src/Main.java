@@ -20,7 +20,9 @@ public class Main {
     static {
         input = new Scanner(System.in);
     }
-
+    static boolean whitespaceSandwiched(String str){
+        return str.matches(".*[a-zA-Z]\\s+[a-zA-Z].*");
+    }
     // Omar Work
     static ArrayList<User> users = new ArrayList<>();
 
@@ -32,8 +34,11 @@ public class Main {
         if(user.trim().isEmpty()){
             throw new IllegalArgumentException("Username cannot be empty.");
         }
+        else if(whitespaceSandwiched(user)){
+            throw new IllegalArgumentException("Password cannot have spaces in the middle");
+        }
         else
-            return user;
+            return user.trim();
     }
 
     public static void Password(String name){
@@ -42,18 +47,28 @@ public class Main {
         if(password.trim().isEmpty() || password.length() < 8){
             throw new IllegalArgumentException("Password cannot be empty and be more than 8 characters.");
         }
+        else if(whitespaceSandwiched(password)){
+            throw new IllegalArgumentException("Password cannot have spaces in the middle");
+        }
         boolean accountExists = false;
+
         for(User u : users){
-            if(u.getName().equals(name) && u.getPassword().equals(password)){
-                System.out.println("Successfully logged in with an existing account.");
-                accountExists = true;
-                break;
+            if(u.getName().equals(name)){
+                if(u.getPassword().equals(password)){
+                    System.out.println("Successfully logged in with an existing account.");
+                    return;
+                } else {
+                    throw new IllegalArgumentException("Account exists but wrong password.");
+                }
             }
         }
         if(!accountExists){
             users.add(new User(name, password));
             System.out.println("Successfully logged in with a new account.");
+        } else if (accountExists) {
+
         }
+
 
     }
 
