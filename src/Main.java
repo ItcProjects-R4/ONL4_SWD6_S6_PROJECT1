@@ -12,21 +12,43 @@ o Exception Handling           Faris
 o ArrayList لتخزين users       Omar
 */
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
 
     // Omar Work
     static ArrayList<User> users = new ArrayList<>();
 
-    public static void main(String[] args) {
+    // Joudy Work
+    public static String Username(String name){
 
-        // Add Users
-        users.add(new User("admin","12345678"));
-        users.add(new User("faris","password123"));
-        users.add(new User("joudy","11111111"));
+        Scanner input = new Scanner(System.in);
 
-        System.out.println("Users Loaded Successfully");
+        System.out.println("Enter a valid username.");
+        name = input.nextLine();
 
+        return name;
     }
 
+    public static String Password(String pass){
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Enter a valid password.");
+        pass = input.nextLine();
+
+        return pass;
+    }
+
+    public static void main(String[] args) {
+
+        users.add(new User("admin","12345678"));
+
+        String name="";
+        String pass="";
+
+        name = Username(name);
+        pass = Password(pass);
+
+    }
 }
