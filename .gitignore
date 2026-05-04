@@ -1,0 +1,21 @@
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# IntelliJ IDEA specific files/folders
+.idea/
+*.iml
+out/
+workspace.xml
+
+# Maven build folder
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+
+# TestNG default report folder
+test-output/
